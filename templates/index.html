@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapathi Roundness Checker</title>
+
+  <!-- Malayalam Font -->
+  <style>
+    @font-face {
+      font-family: 'meeraregular';
+      font-style: normal;
+      font-weight: 400;
+      src: url(https://smc.org.in/downloads/fonts/meera/Meera.woff2?v=7.0) format('woff2'),
+           url(https://smc.org.in/downloads/fonts/meera/Meera.woff?v=7.0) format('woff'),
+           url(https://smc.org.in/downloads/fonts/meera/Meera.ttf?v=7.0) format('truetype');
+    }
+  </style>
+  <link rel="stylesheet" href="static/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="main-container">
+
+    <!-- Left Title -->
+    <div class="masked-text">
+      <div class="chappati-big">Chappati</div>
+      <div class="detector-small">Roundness Detector</div>
+    </div>
+
+    <!-- Upload & Result Box -->
+    <div class="container">
+      <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" id="imageInput" accept="image/*" hidden required onchange="previewImage()" />
+        <label for="imageInput" class="custom-file-upload">📂 Choose Chapathi Image</label>
+        <button type="submit">Check Roundness</button>
+      </form>
+
+      <!-- Image Preview -->
+      {% if image_name %}
+        <canvas id="previewCanvas" width="300" height="300"></canvas>
+        <script>
+          const canvas = document.getElementById("previewCanvas");
+          const ctx = canvas.getContext("2d");
+          const img = new Image();
+          img.onload = function () {
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          };
+          img.src = "{{ url_for('static', filename='uploads/' + image_name) }}";
+        </script>
+      {% endif %}
+
+      <!-- WARNING Message -->
+      {% if warning %}
+        <div class="result-box" style="background: #ffe9e9; border-color: #ff4d4d;">
+          <p style="color: #b80000; font-family: meeraregular;">⚠️ {{ warning }}</p>
+        </div>
+      {% endif %}
+
+      <!-- ROUNDNESS Result -->
+      {% if result %}
+        <div class="result-box">
+          <p><strong>🔵 Roundness:</strong> {{ result }}%</p>
+          <div class="progress-container">
+            <div class="progress-bar" style="width: 74%;" {{ result }}%"></div>
+          </div>
+          <p style="font-family: meeraregular;">
+            {% if result >= 85 %}
+              👌 നല്ല വൃത്താകൃതിയുള്ള ചപ്പാത്തി!
+            {% elif result >= 70 %}
+              🙂 ഒക്കേ അങ്ങനെ തോന്നുന്നു.
+            {% else %}
+              🤔 ഈ ചപ്പാത്തി കുറച്ച് ഒട്ടിച്ചുകിടക്കുന്ന പോലെ ആണ്!
+            {% endif %}
+          </p>
+        </div>
+      {% endif %}
+
+      <button class="reset-btn" onclick="resetApp()">Reset</button>
+    </div>
+
+  </div>
+
+  <script>
+    function resetApp() {
+      document.getElementById("imageInput").value = "";
+      const canvas = document.getElementById("previewCanvas");
+      if (canvas) {
+        canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+      }
+      window.location.href = "/";
+    }
+  </script>
+</body>
+</html>
