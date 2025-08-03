@@ -64,17 +64,17 @@ python app.py
 
 Screenshot 1
 
-![Screenshot1](https://drive.google.com/file/d/1kmyMjsCvRRTno3BkEOsogu0iFcYwpun-/view?usp=drive_link)
+![Screenshot1](https://drive.google.com/file/d/1OJhZqqmSuS3M7NkTeG6DB0oADhQXNapV/view?usp=drive_link)
 Home Page: This shows the user interface with the upload option to select an image.
 
 Screenshot 2
 
-![Screenshot2](https://drive.google.com/file/d/1SXM-oINKg-CUPVO8UGsu637wH5aE2br9/view?usp=drive_link)
+![Screenshot2](https://drive.google.com/file/d/1c-uoCGj3eFLbS-_IRql75OjLvAjkKTMM/view?usp=drive_link)
 Result Page: Displays roundness percentage and motivational message after processing.
 
 Screenshot 3
 
-![Screenshot3](https://drive.google.com/file/d/12cs1bQTljEhYt5qFb7zMNWypR0wBxuJv/view?usp=drive_link)
+![Screenshot3](https://drive.google.com/file/d/1E8Q9YWNr5E1LYT3kgFMFdPHjKELvCcnE/view?usp=drive_link)
 Error Case: Displays an error when a non-circular image is uploaded (e.g., not a chapathi).
 
 📊 Diagrams
